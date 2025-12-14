@@ -11,12 +11,12 @@ import (
 func Execute(paths []string, name string) error {
 	for _, p := range paths {
 		switch p {
-		case "/script":
+		case "script/":
 			err := generate(name, "script")
 			if err != nil {
 				return err
 			}
-		case "/test":
+		case "test/":
 			err := generate(name, "test")
 			if err != nil {
 				return err
@@ -36,7 +36,9 @@ func generate(name, operation string) error {
 		}
 	}
 
-	path := operation + "/" + name + ".s.sol"
+	endingPath := operation[0:1]
+
+	path := operation + "/" + name + "." + endingPath + ".sol"
 
 	baseTemplate := base.Bases[operation]
 

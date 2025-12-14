@@ -9,6 +9,9 @@ func ApplyTemplateOperation(templateOption TemplateOption, operation TemplateOpe
 		return fmt.Errorf("unknown template operation: %s", operation)
 	}
 
+	if name == "" {
+		name = "MyContract"
+	}
 	return execute(option, operation, name)
 }
 

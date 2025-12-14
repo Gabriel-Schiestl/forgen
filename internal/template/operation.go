@@ -1,6 +1,8 @@
 package template
 
-import "github.com/Gabriel-Schiestl/forgen/internal/generate"
+import (
+	"github.com/Gabriel-Schiestl/forgen/internal/generate"
+)
 
 func execute(option TemplateOption, operation TemplateOperation, name string) error {
 	paths := getPaths(option)

@@ -1,7 +1,6 @@
 package base
 
-var testBaseTemplate = `
-// SPDX-License-Identifier: MIT
+var testBaseTemplate = `// SPDX-License-Identifier: MIT
 pragma solidity [version];
 
 import {Test, console} from "forge-std/Test.sol";
