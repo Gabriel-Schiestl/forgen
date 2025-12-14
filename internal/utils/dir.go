@@ -18,13 +18,17 @@ func CreateDir(dir string) error {
 	return nil
 }
 
-func CreateFile(path string) error {
+func CreateFile(path, content string) error {
 	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
 		0600)
 	if err != nil {
 		return err
 	}
-
 	defer file.Close()
+
+	if _, err := file.WriteString(content); err != nil {
+		return err
+	}
+
 	return nil
 }

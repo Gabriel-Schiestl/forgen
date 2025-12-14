@@ -1,6 +1,8 @@
 package generate
 
 import (
+	"strings"
+
 	"github.com/Gabriel-Schiestl/forgen/internal/base"
 	"github.com/Gabriel-Schiestl/forgen/internal/utils"
 )
@@ -35,12 +37,16 @@ func generate(name, operation string) error {
 	}
 
 	path := operation + "/" + name + ".s.sol"
-	if err := utils.CreateFile(path); err != nil {
-		return err
-	}
 
 	baseTemplate := base.Bases[operation]
+
+	baseTemplate = strings.ReplaceAll(baseTemplate, "[name]", name)
+	baseTemplate = strings.ReplaceAll(baseTemplate, "[name_variable]", nameVariable)
+	baseTemplate = strings.ReplaceAll(baseTemplate, "[version]", "0.8.30")
 	
+	if err := utils.CreateFile(path, baseTemplate); err != nil {
+		return err
+	}
 
 	return nil
 }

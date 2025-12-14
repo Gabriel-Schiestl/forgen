@@ -5,7 +5,7 @@ import (
 )
 
 var RootCmd = &cobra.Command{
-	Use:   "fg [SUBCOMMAND]",
+	Use:   "fg",
 	Short: "Simple Foundry code templates generator",
 	Long: `forgen is a powerful CLI tool for generating code templates, like scripts and tests for foundry projects.
 

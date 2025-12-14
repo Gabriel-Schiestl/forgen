@@ -9,7 +9,6 @@ var genCommand = &cobra.Command{
 	Use:   "gen [option]",
 	Short: "Generate a Foundry template",
 	Long: `Generates a Foundry template for the specified option.
-The script will be created in the 'script' directory of your Foundry project.
 If no option is provided, it will generate templates for all options(script, test).
 	`,
 	Args: cobra.MaximumNArgs(1),
