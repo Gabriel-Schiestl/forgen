@@ -1,18 +1,22 @@
 package template
 
-import "fmt"
+import (
+	"fmt"
 
-func ApplyTemplateOperation(templateOption TemplateOption, operation TemplateOperation, name string) error {
+	"github.com/Gabriel-Schiestl/forgen/internal/generate"
+)
+
+func ApplyTemplateOperation(templateOption TemplateOption, operation TemplateOperation, params generate.TemplateParams) error {
 	option := validateOption(templateOption)
 
 	if !validateOperation(operation) {
 		return fmt.Errorf("unknown template operation: %s", operation)
 	}
 
-	if name == "" {
-		name = "MyContract"
+	if params.Name == "" {
+		params.Name = "MyContract"
 	}
-	return execute(option, operation, name)
+	return execute(option, operation, params)
 }
 
 func validateOption(option TemplateOption) TemplateOption {

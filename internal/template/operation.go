@@ -4,13 +4,13 @@ import (
 	"github.com/Gabriel-Schiestl/forgen/internal/generate"
 )
 
-func execute(option TemplateOption, operation TemplateOperation, name string) error {
+func execute(option TemplateOption, operation TemplateOperation, params generate.TemplateParams) error {
 	paths := getPaths(option)
 
 	var err error
 	switch operation {
 	case GenerateOperation:
-		err = generate.Execute(paths, name)
+		err = generate.Execute(paths, params)
 	}
 
 	return err

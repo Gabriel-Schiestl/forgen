@@ -21,7 +21,7 @@ func runGenCommand(cmd *cobra.Command, args []string) {
 		scriptOption = template.TemplateOption(args[0])
 	}
 
-	err := template.ApplyTemplateOperation(scriptOption, template.GenerateOperation, Name)
+	err := template.ApplyTemplateOperation(scriptOption, template.GenerateOperation, params)
 	if err != nil {
 		panic(err)
 	}

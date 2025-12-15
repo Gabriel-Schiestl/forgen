@@ -7,17 +7,22 @@ import (
 	"github.com/Gabriel-Schiestl/forgen/internal/utils"
 )
 
+type TemplateParams struct {
+	Name string
+	Version string
+}
+
 //create a struct params(name, path to create)
-func Execute(paths []string, name string) error {
+func Execute(paths []string, params TemplateParams) error {
 	for _, p := range paths {
 		switch p {
 		case "script/":
-			err := generate(name, "script")
+			err := generate(params, "script")
 			if err != nil {
 				return err
 			}
 		case "test/":
-			err := generate(name, "test")
+			err := generate(params, "test")
 			if err != nil {
 				return err
 			}
@@ -27,8 +32,8 @@ func Execute(paths []string, name string) error {
 	return nil
 }
 
-func generate(name, operation string) error {
-	nameVariable := utils.GetCamelCase(name)
+func generate(params TemplateParams, operation string) error {
+	nameVariable := utils.GetCamelCase(params.Name)
 	exists := utils.FindDir(operation)
 	if !exists {
 		if err := utils.CreateDir(operation); err != nil {
@@ -38,13 +43,13 @@ func generate(name, operation string) error {
 
 	endingPath := operation[0:1]
 
-	path := operation + "/" + name + "." + endingPath + ".sol"
+	path := operation + "/" + params.Name + "." + endingPath + ".sol"
 
 	baseTemplate := base.Bases[operation]
 
-	baseTemplate = strings.ReplaceAll(baseTemplate, "[name]", name)
+	baseTemplate = strings.ReplaceAll(baseTemplate, "[name]", params.Name)
 	baseTemplate = strings.ReplaceAll(baseTemplate, "[name_variable]", nameVariable)
-	baseTemplate = strings.ReplaceAll(baseTemplate, "[version]", "0.8.30")
+	baseTemplate = strings.ReplaceAll(baseTemplate, "[version]", params.Version)
 	
 	if err := utils.CreateFile(path, baseTemplate); err != nil {
 		return err
